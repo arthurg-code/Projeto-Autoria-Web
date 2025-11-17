@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard Professor - Semente do Saber</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="dashboard.js" defer></script>
+</head>
+<body data-role="professor">
+<header>
+  <div class="topbar">
+    <div class="sidebar-btn" onclick="alternarSidebar()" aria-label="Abrir menu">☰</div>
+    <div class="logo">
+      <img src="logo.png" alt="Semente do Saber" class="top-logo">
+      <span class="logo-text">Semente do Saber</span>
+    </div>
+    <div class="top-right">
+      <div id="notifWrap" class="notif-wrap" role="button" tabindex="0" aria-label="Notificações">
+        <img id="notifIcon" class="notif-img" src="icons/bell.png" alt="Notificações">
+        <div id="notifBadge" aria-hidden="true"></div>
+        <div id="notifDropdown" aria-hidden="true"></div>
+      </div>
+      <div class="user-badge" id="userBadge" aria-live="polite"></div>
+      <button class="btn secondary" onclick="sair()">Sair</button>
+    </div>
+  </div>
+</header>
+<aside class="sidebar">
+  <nav>
+    <button class="side-item active" data-section="inicio" onclick="mostrarSecao('inicio')"><img class="side-icon" src="icons/home.png" alt=""><span class="label">Início</span></button>
+    <button class="side-item" data-section="agenda" onclick="mostrarSecao('agenda')"><img class="side-icon" src="icons/agenda.png" alt=""><span class="label">Agenda</span></button>
+    <button class="side-item" data-section="minhas-salas" onclick="mostrarSecao('minhas-salas')"><img class="side-icon" src="icons/classroom.png" alt=""><span class="label">Minhas salas de aula</span></button>
+    <button class="side-item" data-section="duvidas" onclick="mostrarSecao('duvidas')"><img class="side-icon" src="icons/faq.png" alt=""><span class="label">Dúvidas frequentes</span></button>
+    <button class="side-item" data-section="materiais" onclick="mostrarSecao('materiais')"><img class="side-icon" src="icons/materials.png" alt=""><span class="label">Materiais de apoio</span></button>
+    <button class="side-item" data-section="atividades" onclick="mostrarSecao('atividades')"><img class="side-icon" src="icons/tasks.png" alt=""><span class="label">Atividades</span></button>
+  </nav>
+</aside>
+<main class="main-content">
+  <section id="inicio" class="panel active">
+    <header class="panel-header">
+      <h2>Início</h2>
+      <div class="panel-actions inicio-actions">
+        <button class="btn" onclick="abrirModalCriarSala()">+ Nova Sala</button>
+      </div>
+    </header>
+    <div class="rooms-list" id="roomsList"></div>
+  </section>
+  <section id="minhas-salas" class="panel">
+    <header class="panel-header"><h2>Minhas salas de aula</h2></header>
+    <div id="myRoomsList" class="rooms-list"></div>
+  </section>
+  <section id="agenda" class="panel">
+    <header class="panel-header"><h2>Agenda</h2></header>
+    <div id="calendarContainer"></div>
+    <div id="agendaList" style="margin-top:12px"></div>
+  </section>
+  <section id="atividades" class="panel">
+    <header class="panel-header"><h2>Atividades (Todas)</h2></header>
+    <div class="prof-only create-activity">
+      <input id="activityTitle" placeholder="Título da atividade">
+      <input id="activityDue" type="date">
+      <input id="activityMaxPoints" type="number" placeholder="Valor máximo (opcional)">
+      <textarea id="activityDesc" placeholder="Descrição"></textarea>
+      <label>Anexo (opcional)</label>
+      <input id="activityAttachment" type="file" />
+      <select id="activityRoomSelect"></select>
+      <button class="btn" onclick="criarAtividade()">Adicionar atividade</button>
+    </div>
+    <div id="activitiesList" class="activities-list"></div>
+  </section>
+  <section id="duvidas" class="panel">
+    <header class="panel-header"><h2>Dúvidas frequentes</h2></header>
+    <div class="sala-card">
+      <h3>Como criar uma sala e compartilhar o código?</h3>
+      <p class="muted">Clique em "+ Nova Sala", preencha nome, matéria e clique em "Criar sala". O código gerado aparece na página da sala — compartilhe com os alunos. Para salas existentes, use "Editar sala" para atualizar informações.</p>
+    </div>
+    <div class="sala-card">
+      <h3>Como publicar uma atividade com prazo?</h3>
+      <p class="muted">Na aba "Atividades (Todas)", preencha título, descrição, prazo e (opcional) valor máximo. Selecione a sala alvo no campo "Sala" e clique em "Adicionar atividade". A atividade ficará visível para os alunos na sala correspondente.</p>
+    </div>
+    <div class="sala-card">
+      <h3>Como revisar e dar feedback nas entregas?</h3>
+      <p class="muted">Abra a atividade, visualize as entregas dos alunos, abra cada submissão e atribua nota/comentários. Você pode baixar anexos e marcar as entregas como revisadas.</p>
+    </div>
+    <div class="sala-card">
+      <h3>Como gerenciar materiais e anexos?</h3>
+      <p class="muted">Na aba "Materiais de apoio" de cada sala, faça upload de arquivos ou adicione links. Use títulos descritivos para facilitar o acesso dos alunos. Reorganize ou remova materiais conforme necessário.</p>
+    </div>
+    <div class="sala-card">
+      <h3>Como avisar os alunos (notificações)?</h3>
+      <p class="muted">Use o mural da sala para publicar comunicados. Notificações automáticas podem ser enviadas dependendo das configurações de notificação dos alunos; verifique o ícone de sino para ver confirmações de envio.</p>
+    </div>
+  </section>
+  <section id="materiais" class="panel">
+    <header class="panel-header"><h2>Materiais de apoio</h2></header>
+        <div class="sala-card">
+      <h3>Anexos</h3>
+      <ul>
+        <li>
+          <a href="uploads/2025_Matemática 01 - Etapa3_Lista02_Função Quadrática_01.pdf" target="_blank">
+            2025 Matemática 01 – Lista 02: Função Quadrática 01
+          </a>
+        </li>
+
+        <li>
+          <a href="uploads/2025_Matemática 01 - Etapa3_Lista04_FunçãoQuadrática_Inequações.pdf" target="_blank">
+            2025 Matemática 01 – Lista 04: Função Quadrática / Inequações
+          </a>
+        </li>
+
+        <li>
+          <a href="uploads/geografia.pdf" target="_blank">
+            Geografia
+          </a>
+        </li>
+
+        <li>
+          <a href="uploads/U&S Unidade 07 - Relações de Massas.pdf" target="_blank">
+            U&S Unidade 07 – Relações de Massas
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section id="sala" class="panel">
+    <header class="panel-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div id="salaBanner" class="sala-banner"></div>
+        <div>
+          <h2 id="salaTitle">Sala</h2>
+          <div class="muted" id="salaMeta"></div>
+        </div>
+      </div>
+      <div>
+        <button class="btn secondary" onclick="fecharVisualizacaoSala()">Fechar sala</button>
+      </div>
+    </header>
+    <div class="room-view">
+      <div class="room-main" id="salaMain">
+        <nav class="room-tabs" id="salaTabs" style="margin-bottom:12px;">
+          <button class="btn small" data-tab="mural" onclick="renderizarAbaSala('mural')">Mural</button>
+          <button class="btn small" data-tab="atividades" onclick="renderizarAbaSala('atividades')">Atividades</button>
+          <button class="btn small" data-tab="pessoas" onclick="renderizarAbaSala('pessoas')">Pessoas</button>
+        </nav>
+        <div id="salaContent"></div>
+      </div>
+      <aside class="room-side" id="salaSide">
+        <div style="margin-bottom:12px;">
+          <h4>Opções</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <button class="btn" id="joinLeaveBtn">Entrar</button>
+          </div>
+        </div>
+        <div>
+          <h4>Últimas atividades</h4>
+          <div id="salaRecentActs"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+<div class="modal" id="modalCreateRoom" aria-hidden="true">
+  <div class="modal-content">
+    <h3>Criar nova sala</h3>
+    <label>Nome da sala</label>
+    <input id="newRoomName" placeholder="Ex: 3º Ano - Matutino">
+    <label>Matéria</label>
+    <input id="newRoomSubject" placeholder="Ex: Matemática">
+    <label>Cor do banner (escolha uma cor)</label>
+    <input id="newRoomColor" type="color" value="#6C545C">
+    <div class="modal-actions" style="margin-top:12px;">
+      <button class="btn secondary" onclick="fecharModalCriarSala()">Cancelar</button>
+      <button class="btn" onclick="criarSala()">Criar sala</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modalJoinRoom" aria-hidden="true">
+  <div class="modal-content">
+    <h3>Entrar em uma sala</h3>
+    <label>Código da sala</label>
+    <input id="joinRoomCode" placeholder="Ex: AB12CD" maxlength="6">
+    <div class="modal-actions" style="margin-top:12px;">
+      <button class="btn secondary" onclick="fecharModalEntrarSala()">Cancelar</button>
+      <button class="btn" onclick="entrarSalaPorCodigo()">Entrar</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modalRoomDetails" aria-hidden="true">
+  <div class="modal-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 id="roomDetailsTitle">Detalhes</h3>
+      <button class="btn secondary" onclick="fecharDetalhesSala()">Fechar</button>
+    </div>
+    <div id="roomDetailsContent"></div>
+  </div>
+</div>
+</body>
+</html>

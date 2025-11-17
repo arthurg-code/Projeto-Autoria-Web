@@ -1,0 +1,255 @@
+body {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #EAEBDD;
+    color: #333;
+    line-height: 1.6;
+}
+
+.cabecalho {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.container-cabecalho {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icone-logo {
+    width: 45px;
+    height: 45px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    overflow: hidden;
+}
+.icone-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.nome-site {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6C545C;
+    letter-spacing: -0.5px;
+}
+
+.botao-entrar {
+    background: #6C545C;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.botao-entrar:hover {
+    background: #4a3c42;
+}
+
+.secao-principal {
+    min-height: 120%;
+    background: linear-gradient(135deg, #6C545C 0%, #538d65 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 140px 2rem 6rem;
+}
+
+.conteudo-principal {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.titulo-grande {
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.descricao-grande {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.botao-comecar {
+    background: white;
+    color: #538d65;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.botao-comecar:hover {
+    background: #f0f8f2;
+}
+
+.secao-recursos {
+    background: white;
+    padding: 6rem 2rem;
+    position: relative;
+}
+
+.container-recursos {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.titulo-recursos {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #6C545C;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.titulo-recursos::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #538d65 0%, #3a6b47 100%);
+    border-radius: 2px;
+}
+
+.grade-cartoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.cartao-recurso {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(108, 84, 92, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cartao-recurso:hover {
+    transform: translateY(-5px);
+}
+
+.icone-cartao img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+}
+.icone-cartao {
+    width: 60px;
+    height: 60px;
+    background: #6C545C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 24px;
+    color: white;
+}
+
+.texto-cartao {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.5;
+}
+
+.rodape {
+    background: #6C545C;
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+}
+
+.texto-rodape {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .titulo-grande {
+    font-size: 2.5rem;
+    }
+
+    .descricao-grande {
+    font-size: 1.2rem;
+    }
+
+    .container-cabecalho {
+    padding: 0 1rem;
+    }
+
+    .nome-site {
+    font-size: 1.2rem;
+    }
+
+    .grade-cartoes {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    }
+
+    .secao-principal {
+    padding: 100px 1rem 3rem;
+    }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="login_cadastro.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Semente do Saber</title>
+  <script src="loginscript.js" defer></script>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Entrar</h1>
+
+    <form onsubmit="return entrar()">
+      <label style="margin-top: 0;">Selecionar tipo de acesso:</label>
+
+      <select id="tipoconta" required>
+        <option value="aluno">Aluno</option>
+        <option value="professor">Professor</option>
+      </select>
+
+      <label>Usuário:</label>
+      <input id="usuario" type="text" placeholder="Usuário" required>
+
+      <label>Senha:</label>
+      <div class="senha-box">
+        <input id="senha" type="password" placeholder="Senha" required>
+        <button type="button" onclick="alternarMostrarSenha()">👁</button>
+      </div>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <a href="cadastro.html">Criar uma conta</a>
+    <a href="index.html">← Voltar ao início</a>
+  </div>
+</body>
+</html>

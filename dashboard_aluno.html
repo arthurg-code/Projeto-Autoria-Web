@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard Aluno - Semente do Saber</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="dashboard.js" defer></script>
+</head>
+<body data-role="aluno">
+<header>
+  <div class="topbar">
+    <div class="sidebar-btn" onclick="alternarSidebar()" aria-label="Abrir menu">☰</div>
+    <div class="logo">
+      <img src="logo.png" alt="Semente do Saber" class="top-logo">
+      <span class="logo-text">Semente do Saber</span>
+    </div>
+    <div class="top-right">
+      <div id="notifWrap" class="notif-wrap" role="button" tabindex="0">
+        <img id="notifIcon" class="notif-img" src="icons/bell.png" alt="Notificações">
+        <div id="notifBadge" aria-hidden="true"></div>
+        <div id="notifDropdown" aria-hidden="true"></div>
+      </div>
+      <div class="user-badge" id="userBadge" aria-live="polite" title="Usuário conectado"></div>
+      <button class="btn secondary" onclick="sair()">Sair</button>
+    </div>
+  </div>
+</header>
+<aside class="sidebar">
+  <nav>
+    <button class="side-item active" data-section="inicio" onclick="mostrarSecao('inicio')"><img class="side-icon" src="icons/home.png" alt=""><span class="label">Início</span></button>
+    <button class="side-item" data-section="agenda" onclick="mostrarSecao('agenda')"><img class="side-icon" src="icons/agenda.png" alt=""><span class="label">Agenda</span></button>
+    <button class="side-item" data-section="minhas-salas" onclick="mostrarSecao('minhas-salas')"><img class="side-icon" src="icons/classroom.png" alt=""><span class="label">Minhas salas de aula</span></button>
+    <button class="side-item" data-section="duvidas" onclick="mostrarSecao('duvidas')"><img class="side-icon" src="icons/faq.png" alt=""><span class="label">Dúvidas frequentes</span></button>
+    <button class="side-item" data-section="materiais" onclick="mostrarSecao('materiais')"><img class="side-icon" src="icons/materials.png" alt=""><span class="label">Materiais de apoio</span></button>
+    <button class="side-item" data-section="atividades" onclick="mostrarSecao('atividades')"><img class="side-icon" src="icons/tasks.png" alt=""><span class="label">Atividades</span></button>
+  </nav>
+</aside>
+<main class="main-content">
+  <section id="inicio" class="panel active">
+    <header class="panel-header">
+      <h2>Início</h2>
+      <div class="panel-actions inicio-actions">
+        <button class="btn small" onclick="abrirModalEntrarSala()">Entrar na Sala</button>
+      </div>
+    </header>
+    <div class="rooms-list" id="roomsListStudent"></div>
+  </section>
+  <section id="minhas-salas" class="panel">
+    <header class="panel-header"><h2>Minhas salas de aula</h2></header>
+    <div id="myRoomsListStudent" class="rooms-list"></div>
+  </section>
+  <section id="agenda" class="panel">
+    <header class="panel-header"><h2>Agenda</h2></header>
+    <div id="calendarContainerStudent"></div>
+    <div id="agendaListStudent" style="margin-top:12px"></div>
+  </section>
+  <section id="atividades" class="panel">
+    <header class="panel-header"><h2>Atividades</h2></header>
+    <div id="activitiesListStudent" class="activities-list"></div>
+  </section>
+  <section id="duvidas" class="panel">
+    <header class="panel-header"><h2>Dúvidas frequentes</h2></header>
+    <div class="sala-card">
+      <h3>Como entro em uma sala de aula?</h3>
+      <p class="muted">Para entrar em uma sala, clique em "Entrar na Sala" na página inicial e insira o código de 6 caracteres fornecido pelo professor. Se tiver dificuldades, peça ao professor para reenviar o código.</p>
+    </div>
+    <div class="sala-card">
+      <h3>Como entrego uma atividade?</h3>
+      <p class="muted">Abra a aba "Atividades" da sala correspondente, clique na atividade e use o botão "Entregar" para anexar arquivos ou escrever sua resposta. Verifique o prazo na própria atividade. Arquivos aceitos: PDF, DOCX, PNG, JPG (tamanho máximo dependendo da configuração do servidor).</p>
+    </div>
+    <div class="sala-card">
+      <h3>Como vejo minhas notas?</h3>
+      <p class="muted">As notas aparecem na seção "Atividades" da sala ou em um painel de notas (se habilitado). Caso não visualize, confira com seu professor.</p>
+    </div>
+    <div class="sala-card">
+      <h3>Como uso o calendário/agenda?</h3>
+      <p class="muted">A aba "Agenda" mostra prazos e eventos vinculados às suas salas.</p>
+    </div>
+    <p class="muted small" style="margin-top:8px">Ainda com dúvidas? Use o contato do seu professor ou da equipe de suporte interno para ajuda específica.</p>
+  </section>
+  <section id="materiais" class="panel">
+    <header class="panel-header"><h2>Materiais de apoio</h2></header>
+    <div class="sala-card">
+      <h3>Anexos enviados</h3>
+      <ul>
+        <li>
+          <a href="uploads/2025_Matemática 01 - Etapa3_Lista02_Função Quadrática_01.pdf" target="_blank">
+            2025 Matemática 01 – Lista 02: Função Quadrática 01
+          </a>
+        </li>
+
+        <li>
+          <a href="uploads/2025_Matemática 01 - Etapa3_Lista04_FunçãoQuadrática_Inequações.pdf" target="_blank">
+            2025 Matemática 01 – Lista 04: Função Quadrática / Inequações
+          </a>
+        </li>
+
+        <li>
+          <a href="uploads/geografia.pdf" target="_blank">
+            Geografia
+          </a>
+        </li>
+
+        <li>
+          <a href="uploads/U&S Unidade 07 - Relações de Massas.pdf" target="_blank">
+            U&S Unidade 07 – Relações de Massas
+          </a>
+        </li>
+      </ul>
+    </div>
+    <p class="muted small" style="margin-top:8px">Se quiser enviar um material para a sala, peça ao professor para fazer o upload.</p>
+  </section>
+  <section id="sala" class="panel">
+    <header class="panel-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div id="salaBanner" class="sala-banner"></div>
+        <div>
+          <h2 id="salaTitle">Sala</h2>
+          <div class="muted" id="salaMeta"></div>
+        </div>
+      </div>
+      <div>
+        <button class="btn secondary" onclick="fecharVisualizacaoSala()">Fechar sala</button>
+      </div>
+    </header>
+    <div class="room-view">
+      <div class="room-main" id="salaMain">
+        <nav class="room-tabs" id="salaTabs" style="margin-bottom:12px;">
+          <button class="btn small" data-tab="mural" onclick="renderizarAbaSala('mural')">Mural</button>
+          <button class="btn small" data-tab="atividades" onclick="renderizarAbaSala('atividades')">Atividades</button>
+          <button class="btn small" data-tab="pessoas" onclick="renderizarAbaSala('pessoas')">Pessoas</button>
+        </nav>
+        <div id="salaContent"></div>
+      </div>
+      <aside class="room-side" id="salaSide">
+        <div style="margin-bottom:12px;">
+          <h4>Opções</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <button class="btn" id="joinLeaveBtn">Entrar</button>
+          </div>
+        </div>
+        <div>
+          <h4>Últimas atividades</h4>
+          <div id="salaRecentActs"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+<div class="modal" id="modalJoinRoom" aria-hidden="true">
+  <div class="modal-content">
+    <h3>Entrar em uma sala</h3>
+    <label>Código da sala</label>
+    <input id="joinRoomCode" placeholder="Ex: AB12CD" maxlength="6">
+    <div class="modal-actions" style="margin-top:12px;">
+      <button class="btn secondary" onclick="fecharModalEntrarSala()">Cancelar</button>
+      <button class="btn" onclick="entrarSalaPorCodigo()">Entrar</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modalRoomDetails" aria-hidden="true">
+  <div class="modal-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 id="roomDetailsTitle">Detalhes</h3>
+      <button class="btn secondary" onclick="fecharDetalhesSala()">Fechar</button>
+    </div>
+    <div id="roomDetailsContent"></div>
+  </div>
+</div>
+</body>
+</html>
