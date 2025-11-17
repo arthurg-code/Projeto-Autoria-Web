@@ -736,5 +736,4 @@ function abrirAtividade(id) {
     }
   }
   document.addEventListener('DOMContentLoaded', iniciar);
-
 })();
