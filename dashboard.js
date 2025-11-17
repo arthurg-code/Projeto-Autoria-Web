@@ -731,10 +731,10 @@ function abrirAtividade(id) {
     });
     const salasExistem = carregarSalas().length;
     if (!salasExistem && souProfessor()) {
-      const sample = [{ code: gerarCodigo(), name: 'Sala Demo', subject: 'Matemática', primary: '#6C545C', secondary: corAlternativa('#6C545C'), owner: meuId(), created: agoraISO(), members: [] }];
       salvarSalas(sample);
       renderizarSalas();
     }
   }
   document.addEventListener('DOMContentLoaded', iniciar);
+
 })();
